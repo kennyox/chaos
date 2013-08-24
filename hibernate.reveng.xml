@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+<type-mapping>
+	<sql-type jdbc-type="INTEGER" hibernate-type="int"
+		not-null="true">
+	</sql-type>
+	<sql-type jdbc-type="INTEGER" hibernate-type="java.lang.Integer"
+		not-null="false">
+	</sql-type>
+	<sql-type jdbc-type="VARCHAR" hibernate-type="string" length="200"
+		not-null="false">
+	</sql-type>
+	<sql-type jdbc-type="DOUBLE" hibernate-type="java.lang.Double"
+		precision="64" not-null="false">
+	</sql-type>
+</type-mapping>
+
+<table-filter match-name="BRAND" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="BRAND_TAG" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="COUNTRY" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="LEVEL" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="LOCATION" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="LOCATION_TAG" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="RACKET" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="RACKET_TAG" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="TAG" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="USER" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="USER_DETAIL" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="USER_ROLE" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+<table catalog="PUBLIC" schema="PUBLIC" name="USER">
+	<column name="ID"></column>
+	<column name="USER_NAME"></column>
+	<column name="PASSWORD"></column>
+</table>
+<table catalog="PUBLIC" schema="PUBLIC" name="LOCATION">
+		<column name="ID"></column>
+		<column name="ADDRESS"></column>
+		<column name="GOOGLE_MAP_URL"></column>
+		<column name="PHONE"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="COUNTRY">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="CHI_NAME"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="BRAND_TAG">
+		<column name="ID"></column>
+		<column name="BRAND_ID"></column>
+		<column name="TAG_ID"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="USER_DETAIL">
+		<column name="ID"></column>
+		<column name="USER_ID"></column>
+		<column name="FIRST_NAME"></column>
+		<column name="LAST_NAME"></column>
+		<column name="NICK_NAME"></column>
+		<column name="ICON"></column>
+		<column name="EMAIL"></column>
+		<column name="LEVEL_ID"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="USER_ROLE">
+		<column name="ID"></column>
+		<column name="USER_ID"></column>
+		<column name="ROLE"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="LEVEL">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="CHI_DESCRIPTION"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="TAG">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="DESCRIPTION"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="RACKET_TAG">
+		<column name="ID"></column>
+		<column name="RACKET_ID"></column>
+		<column name="TAG_ID"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="RACKET">
+		<column name="ID"></column>
+		<column name="BRAND_ID"></column>
+		<column name="CODE"></column>
+		<column name="NAME"></column>
+		<column name="BALANCE_POINT"></column>
+		<column name="FRAME"></column>
+		<column name="SHAFT"></column>
+		<column name="WEIGHT"></column>
+		<column name="GRIP"></column>
+		<column name="COLOR"></column>
+		<column name="COUNTRY"></column>
+		<column name="REMARKS"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="LOCATION_TAG">
+		<column name="ID"></column>
+		<column name="LOCATION_ID"></column>
+		<column name="TAG_ID"></column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="BRAND">
+		<column name="ID"></column>
+		<column name="BRAND_TAG"></column>
+		<column name="NAME"></column>
+	</table>
+</hibernate-reverse-engineering>

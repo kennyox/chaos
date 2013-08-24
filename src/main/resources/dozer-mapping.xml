@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<configuration>
+		<relationship-type>cumulative</relationship-type>
+	</configuration>
+
+	<mapping relationship-type="non-cumulative">
+		<class-a>com.phoenix.jpa.Project</class-a>
+		<class-b>com.phoenix.vo.ProjectVO</class-b>		
+	</mapping>
+	
+	<mapping relationship-type="non-cumulative">
+		<class-a>com.phoenix.jpa.UserRole</class-a>
+		<class-b>com.phoenix.vo.UserRoleVO</class-b>		
+	</mapping>
+	
+	<mapping relationship-type="non-cumulative">
+		<class-a>com.phoenix.jpa.User</class-a>
+		<class-b>com.phoenix.vo.UserVO</class-b>		
+	</mapping>
+	
+	<mapping relationship-type="non-cumulative">
+		<class-a>com.phoenix.jpa.Content</class-a>
+		<class-b>com.phoenix.vo.ContentVO</class-b>
+		<field custom-converter="com.phoenix.vo.ContentTagCustomConverter"
+			custom-converter-param="tag">
+			<a>taggedByTags</a>
+			<b>taggedByTags</b>
+		</field>
+	</mapping>
+	<mapping relationship-type="non-cumulative">
+		<class-a>com.phoenix.jpa.Tag</class-a>
+		<class-b>com.phoenix.vo.TagVO</class-b>
+		<field custom-converter="com.phoenix.vo.ContentTagCustomConverter"
+			custom-converter-param="tag">
+			<a>taggedByTags</a>
+			<b>taggedByTags</b>
+		</field>
+		<field custom-converter="com.phoenix.vo.ContentTagCustomConverter"
+			custom-converter-param="tag">
+			<a>taggedTags</a>
+			<b>taggedTags</b>
+		</field>
+		<field custom-converter="com.phoenix.vo.ContentTagCustomConverter"
+			custom-converter-param="content">
+			<a>taggedContents</a>
+			<b>taggedContents</b>
+		</field>
+	</mapping>
+</mappings>
