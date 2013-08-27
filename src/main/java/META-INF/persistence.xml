@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="phoenix">
+		<class>com.chaos.jpa.Brand</class>
+		<class>com.chaos.jpa.BrandTag</class>
+		<class>com.chaos.jpa.Country</class>
+		<class>com.chaos.jpa.Level</class>
+		<class>com.chaos.jpa.Location</class>
+		<class>com.chaos.jpa.LocationTag</class>
+		<class>com.chaos.jpa.Racket</class>
+		<class>com.chaos.jpa.RacketTag</class>
+		<class>com.chaos.jpa.Tag</class>
+		<class>com.chaos.jpa.User</class>
+		<class>com.chaos.jpa.UserDetail</class>
+		<class>com.chaos.jpa.UserRole</class>
 	</persistence-unit>
 </persistence>
