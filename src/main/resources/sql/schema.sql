@@ -1,17 +1,16 @@
 drop table racket_photo if exists;
 drop table racket_comments if exists;
-drop table racket_tag if exists;
 drop table racket if exists;
-
-
-
+drop table racket_tag if exists;
+drop table user_detail if exists;
+drop table user_role if exists;
+drop table user if exists;
+drop table country if exists;
 drop table brand_tag if exists;
 drop table brand if exists;
-drop table level if exists;
 drop table location_tag if exists;
 drop table location if exists;
-drop table user_detail if exists;
-drop table user if exists;
+drop table level if exists;
 drop table tag if exists;
 
 create table tag(

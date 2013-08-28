@@ -19,7 +19,7 @@ public class DefaultController extends GenericController {
 	 * 
 	 * @return the name of the ftl page
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getCommonPage() {
 		UserDetails userDetails = null;
 		logger.debug("Received request to show common page");

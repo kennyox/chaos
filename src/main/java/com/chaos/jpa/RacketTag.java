@@ -19,11 +19,11 @@ public class RacketTag implements Serializable {
 	private int id;
 
 	//bi-directional many-to-one association to Racket
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Racket racket;
 
 	//bi-directional many-to-one association to Tag
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Tag tag;
 
 	public RacketTag() {

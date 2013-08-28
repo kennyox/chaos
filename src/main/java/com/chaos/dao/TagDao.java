@@ -11,8 +11,8 @@ public interface TagDao {
 
 	void delete(Tag tag);
 
-	List<Tag> getAllTag(String projectCode);
+	List<Tag> getAllTag();
 	
-	Tag findByName(String projectCode, String name);
+	Tag findByName(String name);
 
 }

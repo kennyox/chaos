@@ -16,8 +16,6 @@ public class UserVO implements Serializable {
 
 	private List<UserRoleVO> userRoles = new ArrayList<UserRoleVO>();
 
-	private ProjectVO project;
-
 	public UserVO() {
 		super();
 
@@ -61,28 +59,16 @@ public class UserVO implements Serializable {
 		this.password = password;
 	}
 
-	public ProjectVO getProject() {
-		return project;
-	}
-
-	public void setProject(ProjectVO project) {
-		this.project = project;
-	}
-
-	@Override
-	public String toString() {
-		return "UserVO [userId=" + userId + ", name=" + name + ", password=" + password + ", userRoles=" + userRoles + ", project=" + project + "]";
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((project == null) ? 0 : project.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
+		result = prime * result
+				+ ((userRoles == null) ? 0 : userRoles.hashCode());
 		return result;
 	}
 
@@ -105,11 +91,6 @@ public class UserVO implements Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (project == null) {
-			if (other.project != null)
-				return false;
-		} else if (!project.equals(other.project))
-			return false;
 		if (userId == null) {
 			if (other.userId != null)
 				return false;
@@ -121,6 +102,12 @@ public class UserVO implements Serializable {
 		} else if (!userRoles.equals(other.userRoles))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "UserVO [userId=" + userId + ", name=" + name + ", password="
+				+ password + ", userRoles=" + userRoles + "]";
 	}
 
 }

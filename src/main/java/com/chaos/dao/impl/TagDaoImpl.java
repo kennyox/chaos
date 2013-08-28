@@ -2,41 +2,40 @@ package com.chaos.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.chaos.dao.TagDao;
 import com.chaos.jpa.Tag;
 
-@Repository
-public class TagDaoImpl extends HibernateDaoSupport implements TagDao {
+@Repository("tagDao")
+public class TagDaoImpl extends CommonDao implements TagDao {
 
 	public void save(Tag tag) {
-		getHibernateTemplate().save(tag);
+		getCurrentSession().save(tag);
 
 	}
 
 	public void update(Tag tag) {
-		getHibernateTemplate().update(tag);
+		getCurrentSession().update(tag);
 
 	}
 
 	public void delete(Tag tag) {
-		getHibernateTemplate().delete(tag);
+		getCurrentSession().delete(tag);
 
 	}
 
 	@Override
-	public List<Tag> getAllTag(String projectCode) {
+	public List<Tag> getAllTag() {
 		@SuppressWarnings("unchecked")
-		List<Tag> result = getHibernateTemplate().find("from Tag where projectCode = ? ", projectCode);
+		List<Tag> result = getCurrentSession().getNamedQuery("Tag.findAll").list();
 		return result;
 	}
 
 	@Override
-	public Tag findByName(String projectCode, String code) {
+	public Tag findByName(String name) {
 		@SuppressWarnings("unchecked")
-		List<Tag> result = getHibernateTemplate().find("from Tag where projectCode = ? and name=?", projectCode, code);
+		List<Tag> result = getCurrentSession().createQuery("from Tag where name=:name").setParameter("name",name).list();
 		if (result != null && result.size() == 1) {
 			return result.get(0);
 		}

@@ -35,7 +35,7 @@ public class UserDetail implements Serializable {
 	private int userId;
 
 	//bi-directional many-to-one association to Level
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Level level;
 
 	public UserDetail() {

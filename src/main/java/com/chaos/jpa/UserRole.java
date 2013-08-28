@@ -21,7 +21,7 @@ public class UserRole implements Serializable {
 	private String role;
 
 	//bi-directional many-to-one association to User
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private User user;
 
 	public UserRole() {

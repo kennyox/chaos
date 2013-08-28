@@ -19,11 +19,11 @@ public class LocationTag implements Serializable {
 	private int id;
 
 	//bi-directional many-to-one association to Location
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Location location;
 
 	//bi-directional many-to-one association to Tag
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Tag tag;
 
 	public LocationTag() {

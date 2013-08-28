@@ -33,8 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		for (UserRole ur : user.getUserRoles()) {
 			ga.add(new SimpleGrantedAuthority(ur.getRole()));
 		}
-		userDetails = new UserDetails(user.getName(), user.getPassword(), true, true, true, true, ga);
-		userDetails.setProjectCode(user.getProject().getCode());
+		userDetails = new UserDetails(user.getUserName(), user.getPassword(), true, true, true, true, ga);		
 		return userDetails;
 	}
 

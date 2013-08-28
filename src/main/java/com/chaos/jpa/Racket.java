@@ -41,7 +41,7 @@ public class Racket implements Serializable {
 	private double weight;
 
 	//bi-directional many-to-one association to Country
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="country")
 	private Country countryBean;
 
