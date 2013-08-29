@@ -16,14 +16,17 @@ public class LocationTag implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
 	//bi-directional many-to-one association to Location
 	@ManyToOne
+	@JoinColumn(name="location_id")
 	private Location location;
 
 	//bi-directional many-to-one association to Tag
 	@ManyToOne
+	@JoinColumn(name="tag_id")
 	private Tag tag;
 
 	public LocationTag() {

@@ -16,12 +16,9 @@ import com.chaos.vo.UserDetails;
 public abstract class GenericController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	protected Logger errorLogger = LoggerFactory.getLogger("ExceptionLogger");
-	protected EnhancedMapper mapper;
-
+	
 	@Autowired
-	public void setMapper(EnhancedMapper mapper) {
-		this.mapper = mapper;
-	}
+	protected EnhancedMapper mapper;
 
 	@ExceptionHandler(Exception.class)
 	public String handleIOException(Exception ex, HttpServletRequest request) {

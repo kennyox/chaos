@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chaos.dao.UserDao;
 import com.chaos.jpa.User;
@@ -26,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 		UserDetails userDetails = null;
 		User user = userDao.findByName(username);

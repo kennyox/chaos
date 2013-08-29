@@ -16,14 +16,17 @@ public class RacketTag implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
 	//bi-directional many-to-one association to Racket
 	@ManyToOne
+	@JoinColumn(name="racket_id")
 	private Racket racket;
 
 	//bi-directional many-to-one association to Tag
 	@ManyToOne
+	@JoinColumn(name="tag_id")
 	private Tag tag;
 
 	public RacketTag() {

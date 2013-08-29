@@ -10,19 +10,23 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="level")
 @NamedQuery(name="Level.findAll", query="SELECT l FROM Level l")
 public class Level implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(name="chi_description")
+	@Column(name="chi_description", length=200)
 	private String chiDescription;
 
+	@Column(length=2000)
 	private String description;
 
+	@Column(length=200)
 	private String name;
 
 	//bi-directional many-to-one association to UserDetail

@@ -10,19 +10,26 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="brand")
 @NamedQuery(name="Brand.findAll", query="SELECT b FROM Brand b")
 public class Brand implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
+	@Column(length=200)
 	private String name;
 
 	//bi-directional many-to-one association to BrandTag
 	@OneToMany(mappedBy="brand")
 	private List<BrandTag> brandTags;
+
+	//bi-directional many-to-one association to Racket
+	@OneToMany(mappedBy="brand")
+	private List<Racket> rackets;
 
 	public Brand() {
 	}
@@ -63,6 +70,28 @@ public class Brand implements Serializable {
 		brandTag.setBrand(null);
 
 		return brandTag;
+	}
+
+	public List<Racket> getRackets() {
+		return this.rackets;
+	}
+
+	public void setRackets(List<Racket> rackets) {
+		this.rackets = rackets;
+	}
+
+	public Racket addRacket(Racket racket) {
+		getRackets().add(racket);
+		racket.setBrand(this);
+
+		return racket;
+	}
+
+	public Racket removeRacket(Racket racket) {
+		getRackets().remove(racket);
+		racket.setBrand(null);
+
+		return racket;
 	}
 
 }

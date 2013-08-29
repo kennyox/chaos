@@ -16,12 +16,15 @@ public class UserRole implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
+	@Column(nullable=false, length=50)
 	private String role;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public UserRole() {

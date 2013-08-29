@@ -98,25 +98,31 @@ create table user_detail(
 
 
 create table racket(
-	id integer identity primary key,
+	id integer,
 	brand_id integer,
 	code varchar(200),
 	name varchar(200),
 	balance_point double,
 	frame varchar(200),
 	shaft varchar(200),
-	weight double,
+	weight_tag integer,
 	grip varchar(200),
 	color varchar(200),
 	country integer,
 	remarks varchar(5000),
-	foreign key (country) references country(id)
+	PRIMARY KEY (ID),
+	foreign key (country) references country(id),
+	foreign key (brand_id) references brand(id),
+	foreign key (weight_tag) references tag(id),
+	CONSTRAINT racket_brand_name UNIQUE(brand_id,name),
+	CONSTRAINT racket_brand_code UNIQUE(brand_id,code)
 );
 
 create table racket_tag(
-	id integer identity primary key,
+	id integer,
 	racket_id integer,
 	tag_id integer,
+	PRIMARY KEY (id),
 	CONSTRAINT racket_tag UNIQUE(racket_id, tag_id),
 	foreign key (racket_id) references racket(id),
 	foreign key (tag_id) references tag(id)

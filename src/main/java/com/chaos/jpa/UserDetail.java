@@ -16,19 +16,22 @@ public class UserDetail implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
+	@Column(length=50)
 	private String email;
 
-	@Column(name="first_name")
+	@Column(name="first_name", length=50)
 	private String firstName;
 
+	@Column(length=2000)
 	private String icon;
 
-	@Column(name="last_name")
+	@Column(name="last_name", length=50)
 	private String lastName;
 
-	@Column(name="nick_name")
+	@Column(name="nick_name", length=50)
 	private String nickName;
 
 	@Column(name="user_id")
@@ -36,6 +39,7 @@ public class UserDetail implements Serializable {
 
 	//bi-directional many-to-one association to Level
 	@ManyToOne
+	@JoinColumn(name="level_id")
 	private Level level;
 
 	public UserDetail() {

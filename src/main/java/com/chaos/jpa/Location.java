@@ -10,19 +10,23 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="location")
 @NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
+	@Column(nullable=false, length=2000)
 	private String address;
 
-	@Column(name="google_map_url")
+	@Column(name="google_map_url", length=5000)
 	private String googleMapUrl;
 
+	@Column(length=10)
 	private String phone;
 
 	//bi-directional many-to-one association to LocationTag

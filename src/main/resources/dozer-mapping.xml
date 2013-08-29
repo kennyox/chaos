@@ -24,5 +24,29 @@
 	<mapping relationship-type="non-cumulative">
 		<class-a>com.chaos.jpa.Brand</class-a>
 		<class-b>com.chaos.vo.BrandVO</class-b>
+		<field custom-converter="com.chaos.vo.converter.TagConverter" 
+			custom-converter-param="BRAND">
+			<a>brandTags</a>
+			<b>tags</b>
+		</field>
 	</mapping>
+	
+	<mapping relationship-type="non-cumulative">
+		<class-a>com.chaos.jpa.Racket</class-a>
+		<class-b>com.chaos.vo.RacketVO</class-b>
+		<field custom-converter="com.chaos.vo.converter.BrandConverter">
+		<a>brand</a>
+		<b>brand</b>
+		</field>
+		<field custom-converter="com.chaos.vo.converter.TagConverter" 
+			custom-converter-param="RACKET">
+			<a>racketTags</a>
+			<b>tags</b>
+		</field>
+		<field custom-converter="com.chaos.vo.converter.CountryConverter">
+			<a>countryBean</a>
+			<b>country</b>
+		</field>
+	</mapping>
+	
 </mappings>

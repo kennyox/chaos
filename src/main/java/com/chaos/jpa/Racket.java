@@ -10,40 +10,54 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="racket")
 @NamedQuery(name="Racket.findAll", query="SELECT r FROM Racket r")
 public class Racket implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
 	@Column(name="balance_point")
 	private double balancePoint;
 
-	@Column(name="brand_id")
-	private int brandId;
-
+	@Column(length=200)
 	private String code;
 
+	@Column(length=200)
 	private String color;
 
+	@Column(length=200)
 	private String frame;
 
+	@Column(length=200)
 	private String grip;
 
+	@Column(length=200)
 	private String name;
 
+	@Column(length=5000)
 	private String remarks;
 
+	@Column(length=200)
 	private String shaft;
 
-	private double weight;
+	//bi-directional many-to-one association to Brand
+	@ManyToOne
+	@JoinColumn(name="brand_id")
+	private Brand brand;
 
 	//bi-directional many-to-one association to Country
 	@ManyToOne
 	@JoinColumn(name="country")
 	private Country countryBean;
+
+	//bi-directional many-to-one association to Tag
+	@ManyToOne
+	@JoinColumn(name="weight_tag")
+	private Tag tag;
 
 	//bi-directional many-to-one association to RacketTag
 	@OneToMany(mappedBy="racket")
@@ -66,14 +80,6 @@ public class Racket implements Serializable {
 
 	public void setBalancePoint(double balancePoint) {
 		this.balancePoint = balancePoint;
-	}
-
-	public int getBrandId() {
-		return this.brandId;
-	}
-
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
 	}
 
 	public String getCode() {
@@ -132,12 +138,12 @@ public class Racket implements Serializable {
 		this.shaft = shaft;
 	}
 
-	public double getWeight() {
-		return this.weight;
+	public Brand getBrand() {
+		return this.brand;
 	}
 
-	public void setWeight(double weight) {
-		this.weight = weight;
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 
 	public Country getCountryBean() {
@@ -146,6 +152,14 @@ public class Racket implements Serializable {
 
 	public void setCountryBean(Country countryBean) {
 		this.countryBean = countryBean;
+	}
+
+	public Tag getTag() {
+		return this.tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 
 	public List<RacketTag> getRacketTags() {

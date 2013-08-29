@@ -10,17 +10,20 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="country")
 @NamedQuery(name="Country.findAll", query="SELECT c FROM Country c")
 public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(name="chi_name")
+	@Column(name="chi_name", length=20)
 	private String chiName;
 
+	@Column(length=200)
 	private String name;
 
 	//bi-directional many-to-one association to Racket

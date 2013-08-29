@@ -32,7 +32,7 @@ public class UserDaoImpl extends CommonDao implements UserDao {
 	public User findByName(String name) {
 		@SuppressWarnings("unchecked")
 		List<User> result = getCurrentSession()
-				.createQuery("from User where name= :name")
+				.createQuery("from User where userName= :name")
 				.setParameter("name", name).list();
 		if (result != null && result.size() == 1) {
 			return result.get(0);
