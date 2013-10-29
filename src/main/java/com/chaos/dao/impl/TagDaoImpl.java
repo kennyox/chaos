@@ -11,31 +11,31 @@ import com.chaos.jpa.Tag;
 public class TagDaoImpl extends CommonDao implements TagDao {
 
 	public void save(Tag tag) {
-		getCurrentSession().save(tag);
+		getEm().persist(tag);
 
 	}
 
 	public void update(Tag tag) {
-		getCurrentSession().update(tag);
+		getEm().merge(tag);
 
 	}
 
 	public void delete(Tag tag) {
-		getCurrentSession().delete(tag);
+		getEm().remove(tag);
 
 	}
 
 	@Override
 	public List<Tag> getAllTag() {
 		@SuppressWarnings("unchecked")
-		List<Tag> result = getCurrentSession().getNamedQuery("Tag.findAll").list();
+		List<Tag> result = getEm().createNamedQuery("Tag.findAll").getResultList();
 		return result;
 	}
 
 	@Override
 	public Tag findByName(String name) {
 		@SuppressWarnings("unchecked")
-		List<Tag> result = getCurrentSession().createQuery("from Tag where name=:name").setParameter("name",name).list();
+		List<Tag> result = getEm().createQuery("from Tag where name=:name").setParameter("name",name).getResultList();
 		if (result != null && result.size() == 1) {
 			return result.get(0);
 		}

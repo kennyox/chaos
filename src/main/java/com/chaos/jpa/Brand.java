@@ -10,18 +10,20 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="brand")
 @NamedQuery(name="Brand.findAll", query="SELECT b FROM Brand b")
 public class Brand implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(length=200)
 	private String name;
+
+	//bi-directional many-to-one association to Tag
+	@ManyToOne
+	@JoinColumn(name="brand_tag")
+	private Tag tag;
 
 	//bi-directional many-to-one association to BrandTag
 	@OneToMany(mappedBy="brand")
@@ -48,6 +50,14 @@ public class Brand implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Tag getTag() {
+		return this.tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 
 	public List<BrandTag> getBrandTags() {

@@ -5,28 +5,28 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the location_tag database table.
+ * The persistent class for the event_tag database table.
  * 
  */
 @Entity
-@Table(name="location_tag")
-@NamedQuery(name="LocationTag.findAll", query="SELECT l FROM LocationTag l")
-public class LocationTag implements Serializable {
+@Table(name="event_tag")
+@NamedQuery(name="EventTag.findAll", query="SELECT e FROM EventTag e")
+public class EventTag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
-	//bi-directional many-to-one association to Location
+	//bi-directional many-to-one association to Event
 	@ManyToOne
-	private Location location;
+	private Event event;
 
 	//bi-directional many-to-one association to Tag
 	@ManyToOne
 	private Tag tag;
 
-	public LocationTag() {
+	public EventTag() {
 	}
 
 	public int getId() {
@@ -37,12 +37,12 @@ public class LocationTag implements Serializable {
 		this.id = id;
 	}
 
-	public Location getLocation() {
-		return this.location;
+	public Event getEvent() {
+		return this.event;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 	public Tag getTag() {

@@ -10,28 +10,28 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="level")
 @NamedQuery(name="Level.findAll", query="SELECT l FROM Level l")
 public class Level implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(name="chi_description", length=200)
+	@Column(name="chi_description")
 	private String chiDescription;
 
-	@Column(length=2000)
 	private String description;
 
-	@Column(length=200)
 	private String name;
 
-	//bi-directional many-to-one association to UserDetail
+	//bi-directional many-to-one association to Event
 	@OneToMany(mappedBy="level")
-	private List<UserDetail> userDetails;
+	private List<Event> events;
+
+	//bi-directional many-to-one association to User
+	@OneToMany(mappedBy="level")
+	private List<User> users;
 
 	public Level() {
 	}
@@ -68,26 +68,48 @@ public class Level implements Serializable {
 		this.name = name;
 	}
 
-	public List<UserDetail> getUserDetails() {
-		return this.userDetails;
+	public List<Event> getEvents() {
+		return this.events;
 	}
 
-	public void setUserDetails(List<UserDetail> userDetails) {
-		this.userDetails = userDetails;
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
-	public UserDetail addUserDetail(UserDetail userDetail) {
-		getUserDetails().add(userDetail);
-		userDetail.setLevel(this);
+	public Event addEvent(Event event) {
+		getEvents().add(event);
+		event.setLevel(this);
 
-		return userDetail;
+		return event;
 	}
 
-	public UserDetail removeUserDetail(UserDetail userDetail) {
-		getUserDetails().remove(userDetail);
-		userDetail.setLevel(null);
+	public Event removeEvent(Event event) {
+		getEvents().remove(event);
+		event.setLevel(null);
 
-		return userDetail;
+		return event;
+	}
+
+	public List<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public User addUser(User user) {
+		getUsers().add(user);
+		user.setLevel(this);
+
+		return user;
+	}
+
+	public User removeUser(User user) {
+		getUsers().remove(user);
+		user.setLevel(null);
+
+		return user;
 	}
 
 }

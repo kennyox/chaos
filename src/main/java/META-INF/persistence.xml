@@ -4,6 +4,10 @@
 		<class>com.chaos.jpa.Brand</class>
 		<class>com.chaos.jpa.BrandTag</class>
 		<class>com.chaos.jpa.Country</class>
+		<class>com.chaos.jpa.Event</class>
+		<class>com.chaos.jpa.EventAdmin</class>
+		<class>com.chaos.jpa.EventInvitee</class>
+		<class>com.chaos.jpa.EventParticipant</class>
 		<class>com.chaos.jpa.Level</class>
 		<class>com.chaos.jpa.Location</class>
 		<class>com.chaos.jpa.LocationTag</class>
@@ -11,7 +15,7 @@
 		<class>com.chaos.jpa.RacketTag</class>
 		<class>com.chaos.jpa.Tag</class>
 		<class>com.chaos.jpa.User</class>
-		<class>com.chaos.jpa.UserDetail</class>
 		<class>com.chaos.jpa.UserRole</class>
+		<class>com.chaos.jpa.EventTag</class>
 	</persistence-unit>
 </persistence>

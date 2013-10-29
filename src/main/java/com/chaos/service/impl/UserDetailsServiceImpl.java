@@ -28,14 +28,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException, DataAccessException {
 		UserDetails userDetails = null;
 		User user = userDao.findByName(username);
 		List<GrantedAuthority> ga = new ArrayList<GrantedAuthority>();
-		for (UserRole ur : user.getUserRoles()) {
-			ga.add(new SimpleGrantedAuthority(ur.getRole()));
+		if (user != null) {
+			for (UserRole ur : user.getUserRoles()) {
+				ga.add(new SimpleGrantedAuthority(ur.getRole()));
+			}
+			userDetails = new UserDetails(user.getUserName(),
+					user.getPassword(), true, true, true, true, ga);
+		}else{
+			throw new UsernameNotFoundException(username);
 		}
-		userDetails = new UserDetails(user.getUserName(), user.getPassword(), true, true, true, true, ga);		
 		return userDetails;
 	}
 

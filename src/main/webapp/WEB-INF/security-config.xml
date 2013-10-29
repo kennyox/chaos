@@ -13,11 +13,9 @@
 	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<import resource="dataAccessContext.xml" />
 	<aop:aspectj-autoproxy />
-
 	<context:annotation-config />
 
 	<security:http security="none" pattern="/admin/login" />
-	<security:http security="none" pattern="/admin/login/perform" />
 	<security:http security="none" pattern="/admin/loginFail" />
 	
 	<security:http realm="Project Realm" access-denied-page="/admin/accessDenied">
@@ -25,9 +23,12 @@
 			authentication-failure-url="/admin/loginFail" />
 		
 		<security:logout logout-url="/admin/logout" logout-success-url="/" />
+		 <security:remember-me key="badminton.login" user-service-ref="userDetailsService" />
+		<security:intercept-url pattern="/admin/login/perform" access="IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED" />
 		<security:intercept-url pattern="/admin/**/*" access="ROLE_MASTER, ROLE_ADMIN" />
 		<security:intercept-url pattern="/admin/" access="ROLE_MASTER,ROLE_ADMIN" />
 		<security:intercept-url pattern="/admin" access="ROLE_MASTER,ROLE_ADMIN" />
+		
 	</security:http>
 
 	<security:authentication-manager alias="authenticationManager">

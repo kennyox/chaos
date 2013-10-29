@@ -10,24 +10,26 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="location")
 @NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(nullable=false, length=2000)
 	private String address;
 
-	@Column(name="google_map_url", length=5000)
+	@Column(name="google_map_url")
 	private String googleMapUrl;
 
-	@Column(length=10)
+	private String name;
+
 	private String phone;
+
+	//bi-directional many-to-one association to Event
+	@OneToMany(mappedBy="location")
+	private List<Event> events;
 
 	//bi-directional many-to-one association to LocationTag
 	@OneToMany(mappedBy="location")
@@ -60,12 +62,42 @@ public class Location implements Serializable {
 		this.googleMapUrl = googleMapUrl;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getPhone() {
 		return this.phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public List<Event> getEvents() {
+		return this.events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public Event addEvent(Event event) {
+		getEvents().add(event);
+		event.setLocation(this);
+
+		return event;
+	}
+
+	public Event removeEvent(Event event) {
+		getEvents().remove(event);
+		event.setLocation(null);
+
+		return event;
 	}
 
 	public List<LocationTag> getLocationTags() {

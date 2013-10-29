@@ -5,26 +5,28 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the user_role database table.
+ * The persistent class for the event_participant database table.
  * 
  */
 @Entity
-@Table(name="user_role")
-@NamedQuery(name="UserRole.findAll", query="SELECT u FROM UserRole u")
-public class UserRole implements Serializable {
+@Table(name="event_participant")
+@NamedQuery(name="EventParticipant.findAll", query="SELECT e FROM EventParticipant e")
+public class EventParticipant implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
-	private String role;
+	//bi-directional many-to-one association to Event
+	@ManyToOne
+	private Event event;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	private User user;
 
-	public UserRole() {
+	public EventParticipant() {
 	}
 
 	public int getId() {
@@ -35,12 +37,12 @@ public class UserRole implements Serializable {
 		this.id = id;
 	}
 
-	public String getRole() {
-		return this.role;
+	public Event getEvent() {
+		return this.event;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 	public User getUser() {

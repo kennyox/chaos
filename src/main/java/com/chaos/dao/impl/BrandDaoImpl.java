@@ -11,31 +11,30 @@ import com.chaos.jpa.Brand;
 public class BrandDaoImpl extends CommonDao implements BrandDao {
 
 	public void save(Brand brand) {
-		getCurrentSession().save(brand);
-
+		getEm().persist(brand);
 	}
 
 	public void update(Brand brand) {
-		getCurrentSession().update(brand);
+		getEm().merge(brand);
 
 	}
 
 	public void delete(Brand brand) {
-		getCurrentSession().delete(brand);
+		getEm().remove(brand);
 
 	}
 
 	@Override
 	public List<Brand> getAllBrand() {
 		@SuppressWarnings("unchecked")
-		List<Brand> result = getCurrentSession().getNamedQuery("Brand.findAll").list();
+		List<Brand> result = getEm().createNamedQuery("Brand.findAll").getResultList();
 		return result;
 	}
 
 	@Override
 	public Brand findByName(String name) {
 		@SuppressWarnings("unchecked")
-		List<Brand> result = getCurrentSession().createQuery("from Brand where name=:name").setParameter("name",name).list();
+		List<Brand> result = getEm().createQuery("from Brand where name=:name").setParameter("name",name).getResultList();
 		if (result != null && result.size() == 1) {
 			return result.get(0);
 		}

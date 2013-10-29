@@ -15,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,18 +76,26 @@ public class AdminController extends GenericController {
 		return "admin/login";
 	}
 
-	@RequestMapping(value = "/login/perform", method = RequestMethod.POST)
+	@Autowired
+	SecurityContextRepository repository;
+	@Autowired
+	RememberMeServices rememberMeServices;
+
+
+	@RequestMapping(value = "/login/perform")
 	@ResponseBody
-	public UserDetails performLogin(@RequestParam("userName") String userName,
-			@RequestParam("password") String password,
+	public UserDetails performLogin(
+			@RequestParam("j_username") String userName,
+			@RequestParam("j_password") String password,
 			HttpServletRequest request, HttpServletResponse response) {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 				userName, password);
 		try {
 			Authentication auth = authenticationManager.authenticate(token);
 			SecurityContextHolder.getContext().setAuthentication(auth);
-
-			return userDetailsService.loadUserByUsername(auth.getName());
+			repository.saveContext(SecurityContextHolder.getContext(), request, response);
+			rememberMeServices.loginSuccess(request, response, auth);
+			return (UserDetails)auth.getPrincipal();
 		} catch (BadCredentialsException ex) {
 			return null;
 

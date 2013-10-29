@@ -1,6 +1,16 @@
-insert into country values(1,'Singapor','Singapor');
+insert into location values(1,'美林','tai wai','24541234');
+insert into location values(2,'源禾路','sha tin','29541234');
+insert into location values(3,'牛頭角行市','kowloon bay','29341234');
+insert into location values(4,'洛克道','灣仔','29321134');
+
+insert into location_tag values (1,1,1);
+insert into location_tag values (2,2,1);
+insert into location_tag values (3,3,2);
+insert into location_tag values (3,4,3);
+
+insert into country values(1,'Singapore','Singapore');
 insert into country values(2,'Japan','Japan');
-insert into country values(3,'China','Japan');
+insert into country values(3,'China','China');
 
 insert into user values(1,'kenny','198342');
 insert into user values(2,'kennyng','198342');

@@ -10,21 +10,21 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="tag")
 @NamedQuery(name="Tag.findAll", query="SELECT t FROM Tag t")
 public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(length=2000)
 	private String description;
 
-	@Column(length=50)
 	private String name;
+
+	//bi-directional many-to-one association to Brand
+	@OneToMany(mappedBy="tag")
+	private List<Brand> brands;
 
 	//bi-directional many-to-one association to BrandTag
 	@OneToMany(mappedBy="tag")
@@ -41,6 +41,10 @@ public class Tag implements Serializable {
 	//bi-directional many-to-one association to RacketTag
 	@OneToMany(mappedBy="tag")
 	private List<RacketTag> racketTags;
+
+	//bi-directional many-to-one association to EventTag
+	@OneToMany(mappedBy="tag")
+	private List<EventTag> eventTags;
 
 	public Tag() {
 	}
@@ -67,6 +71,28 @@ public class Tag implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Brand> getBrands() {
+		return this.brands;
+	}
+
+	public void setBrands(List<Brand> brands) {
+		this.brands = brands;
+	}
+
+	public Brand addBrand(Brand brand) {
+		getBrands().add(brand);
+		brand.setTag(this);
+
+		return brand;
+	}
+
+	public Brand removeBrand(Brand brand) {
+		getBrands().remove(brand);
+		brand.setTag(null);
+
+		return brand;
 	}
 
 	public List<BrandTag> getBrandTags() {
@@ -155,6 +181,28 @@ public class Tag implements Serializable {
 		racketTag.setTag(null);
 
 		return racketTag;
+	}
+
+	public List<EventTag> getEventTags() {
+		return this.eventTags;
+	}
+
+	public void setEventTags(List<EventTag> eventTags) {
+		this.eventTags = eventTags;
+	}
+
+	public EventTag addEventTag(EventTag eventTag) {
+		getEventTags().add(eventTag);
+		eventTag.setTag(this);
+
+		return eventTag;
+	}
+
+	public EventTag removeEventTag(EventTag eventTag) {
+		getEventTags().remove(eventTag);
+		eventTag.setTag(null);
+
+		return eventTag;
 	}
 
 }

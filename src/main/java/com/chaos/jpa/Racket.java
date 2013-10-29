@@ -10,43 +10,33 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="racket")
 @NamedQuery(name="Racket.findAll", query="SELECT r FROM Racket r")
 public class Racket implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
 	private int id;
 
 	@Column(name="balance_point")
 	private double balancePoint;
 
-	@Column(length=200)
 	private String code;
 
-	@Column(length=200)
 	private String color;
 
-	@Column(length=200)
 	private String frame;
 
-	@Column(length=200)
 	private String grip;
 
-	@Column(length=200)
 	private String name;
 
-	@Column(length=5000)
 	private String remarks;
 
-	@Column(length=200)
 	private String shaft;
 
 	//bi-directional many-to-one association to Brand
 	@ManyToOne
-	@JoinColumn(name="brand_id")
 	private Brand brand;
 
 	//bi-directional many-to-one association to Country

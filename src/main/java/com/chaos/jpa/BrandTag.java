@@ -16,17 +16,14 @@ public class BrandTag implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
 	private int id;
 
 	//bi-directional many-to-one association to Brand
 	@ManyToOne
-	@JoinColumn(name="brand_id")
 	private Brand brand;
 
 	//bi-directional many-to-one association to Tag
 	@ManyToOne
-	@JoinColumn(name="tag_id")
 	private Tag tag;
 
 	public BrandTag() {
