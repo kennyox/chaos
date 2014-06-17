@@ -16,8 +16,8 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/chaos" />
-		<property name="username" value="chaos" />
-		<property name="password" value="EVyxf,Hng3qgy%4J" />
+		<property name="username" value="adminzQ9Dauf" />
+		<property name="password" value="YdcZ2w_v8vDA" />
 	</bean>
 
 	<bean id="hibernateJpaVendorAdapter"
