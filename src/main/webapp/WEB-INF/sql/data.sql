@@ -1,25 +1,4 @@
-insert into location values(1,'美林','tai wai','24541234');
-insert into location values(2,'源禾路','sha tin','29541234');
-insert into location values(3,'牛頭角行市','kowloon bay','29341234');
-insert into location values(4,'洛克道','灣仔','29321134');
-
-insert into location_tag values (1,1,1);
-insert into location_tag values (2,2,1);
-insert into location_tag values (3,3,2);
-insert into location_tag values (3,4,3);
-
-insert into country values(1,'Singapore','Singapore');
-insert into country values(2,'Japan','Japan');
-insert into country values(3,'China','China');
-
-insert into user values(1,'kenny','198342');
-insert into user values(2,'kennyng','198342');
-insert into user values(3,'testing','198342');
-
-
-insert into user_role values(1, 1,'ROLE_MASTER');
-insert into user_role values(2, 2,'ROLE_ADMIN');
-insert into user_role values(3, 3,'ROLE_ADMIN');
+use chaos;
 
 insert into tag values (1,'NT','NT');
 insert into tag values (2,'KL','KL');
@@ -36,6 +15,30 @@ insert into tag values (12,'4U','4U');
 insert into tag values (13,'5U','5U');
 insert into tag values (14,'3G','3G');
 insert into tag values (15,'4G','4G');
+
+
+insert into location (id, name, address, phone) values(1,'美林','tai wai','24541234');
+insert into location (id, name, address, phone) values(2,'源禾路','sha tin','29541234');
+insert into location (id, name, address, phone) values(3,'牛頭角行市','kowloon bay','29341234');
+insert into location (id, name, address, phone) values(4,'洛克道','灣仔','29321134');
+
+insert into location_tag values (1,1,1);
+insert into location_tag values (2,2,1);
+insert into location_tag values (3,3,2);
+insert into location_tag values (3,4,3);
+
+insert into country values(1,'Singapore','Singapore');
+insert into country values(2,'Japan','Japan');
+insert into country values(3,'China','China');
+
+insert into user (id,user_name, password) values(1,'kenny','198342');
+insert into user (id,user_name, password) values(2,'kennyng','198342');
+insert into user (id,user_name, password) values(3,'testing','198342');
+
+
+insert into user_role values(1, 1,'ROLE_MASTER');
+insert into user_role values(2, 2,'ROLE_ADMIN');
+insert into user_role values(3, 3,'ROLE_ADMIN');
 
 insert into brand values(1,4,'Gosen');
 insert into brand values(2,5,'Wilson');
