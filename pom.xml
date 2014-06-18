@@ -28,6 +28,7 @@
 		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
+		<logback.spring.version>0.1.2</logback.spring.version>
 
 		<!-- Test -->
 		<junit.version>4.11</junit.version>
@@ -74,6 +75,17 @@
 		</dependency>
 
 		<!-- Spring and Transactions -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-framework.version}</version>
+			<exclusions>
+			   <exclusion>
+				  <groupId>commons-logging</groupId>
+				  <artifactId>commons-logging</artifactId>
+			   </exclusion>
+			</exclusions>            
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
@@ -147,6 +159,12 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+			<version>${logback.spring.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 

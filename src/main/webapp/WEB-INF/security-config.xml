@@ -36,6 +36,16 @@
 	</security:authentication-manager>
 
 	<bean id="userDetailsService" class="com.chaos.service.impl.UserDetailsServiceImpl">
+	<bean class="ch.qos.logback.ext.spring.ApplicationContextHolder"/>
+	<bean id="CONSOLE" class="ch.qos.logback.core.ConsoleAppender" init-method="start" destroy-method="stop">
+        <property name="context" value="#{ T(org.slf4j.LoggerFactory).getILoggerFactory() }"/>
+        <property name="encoder">
+            <bean class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" init-method="start" destroy-method="stop">
+                <property name="context" value="#{ T(org.slf4j.LoggerFactory).getILoggerFactory() }"/>
+                <property name="pattern" value="%date %-5level [%thread] %logger{36} %m%n"/>
+            </bean>
+        </property>
+    </bean>
 
 	</bean>
 	<bean id="webexpressionHandler"
