@@ -7,15 +7,15 @@
     </appender>
  
     <logger name="com.repos">
-        <level value="INFO" />
+        <level value="DEBUG" />
     </logger>
  
     <logger name="org.springframework">
-        <level value="INFO" />
+        <level value="DEBUG" />
     </logger>
  
     <root>
-        <level value="INFO" />
+        <level value="DEBUG" />
         <appender-ref ref="CONSOLE" />
     </root>
 </configuration>
