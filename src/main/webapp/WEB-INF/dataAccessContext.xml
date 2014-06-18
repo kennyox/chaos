@@ -14,17 +14,17 @@
 		/> <jdbc:script location="WEB-INF/sql/data.sql" /> </jdbc:embedded-database> -->
 
 
-	<jee:jndi-lookup id="dataSource"
+	<!--<jee:jndi-lookup id="dataSource"
    jndi-name="jdbc/chaos"
-   expected-type="javax.sql.DataSource" />
-	<!--<bean id="dataSource"
+   expected-type="javax.sql.DataSource" />-->
+	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/chaos" />
+		<property name="url" value="jdbc:mysql://chaos-badmintongame.rhcloud.com:3306/chaos" />
 		<property name="username" value="adminzQ9Dauf" />
 		<property name="password" value="YdcZ2w_v8vDA" />
 	</bean>
--->
+
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
