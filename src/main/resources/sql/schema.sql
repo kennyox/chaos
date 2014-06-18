@@ -1,17 +1,17 @@
-drop table racket_photo;
-drop table racket_comments;
-drop table racket_tag;
-drop table racket;
-drop table user_detail;
-drop table user_role;
-drop table user;
-drop table country;
-drop table brand_tag;
-drop table brand;
-drop table location_tag;
-drop table location;
-drop table level;
-drop table tag;
+drop table if exists racket_photo;
+drop table if exists racket_comments;
+drop table if exists racket_tag;
+drop table if exists racket;
+drop table if exists user_detail;
+drop table if exists user_role;
+drop table if exists user;
+drop table if exists country;
+drop table if exists brand_tag;
+drop table if exists brand;
+drop table if exists location_tag;
+drop table if exists location;
+drop table if exists level;
+drop table if exists tag;
 
 create table tag(
 	id integer, 
@@ -87,7 +87,7 @@ create table user(
 	icon varchar(2000),
 	email varchar(50) not null,
 	level_id integer,
-	create_dtm timestamp not null,
+	create_dtm timestamp null,
 	last_update_dtm timestamp not null default current_timestamp,
 	PRIMARY KEY (id),
 	foreign key (level_id) references level(id),

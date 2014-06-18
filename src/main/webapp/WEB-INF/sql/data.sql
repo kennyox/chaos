@@ -1,5 +1,3 @@
-use chaos;
-
 insert into tag values (1,'NT','NT');
 insert into tag values (2,'KL','KL');
 insert into tag values (3,'HK','HK');
@@ -25,7 +23,7 @@ insert into location (id, name, address, phone) values(4,'洛克道','灣仔','2
 insert into location_tag values (1,1,1);
 insert into location_tag values (2,2,1);
 insert into location_tag values (3,3,2);
-insert into location_tag values (3,4,3);
+insert into location_tag values (4,4,3);
 
 insert into country values(1,'Singapore','Singapore');
 insert into country values(2,'Japan','Japan');
