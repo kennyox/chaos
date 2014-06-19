@@ -1,18 +1,6 @@
-drop table if exists racket_photo;
-drop table if exists racket_comments;
-drop table if exists racket_tag;
-drop table if exists racket;
-drop table if exists user_detail;
-drop table if exists user_role;
-drop table if exists user;
-drop table if exists country;
-drop table if exists brand_tag;
-drop table if exists brand;
-drop table if exists location_tag;
-drop table if exists location;
-drop table if exists level;
-drop table if exists tag;
-
+drop database cb_chaos;
+create database cb_chaos;
+use cb_chaos;
 create table tag(
 	id integer, 
 	name varchar(50), 
@@ -21,13 +9,48 @@ create table tag(
 	CONSTRAINT tag_name UNIQUE(name)
 );
 
+create table tag_group(
+	id integer, 
+	
+	name varchar(200),
+	PRIMARY KEY (id),
+	CONSTRAINT group_name UNIQUE(name)
+);
+
+create table tag_group_list(
+	id integer,
+	tag_group_id integer, 
+	tag_id integer,
+	PRIMARY KEY (id),
+	CONSTRAINT tag_group UNIQUE (tag_group_id,tag_id)
+);
+
+	
+create table country(
+	id integer,
+	name varchar(200),
+	chi_name varchar(20),
+	PRIMARY KEY (id)
+);
+
 create table level(
 	id integer,
 	name varchar(200),
 	description varchar(2000),
 	chi_description varchar(200),
+	tag_id integer,
 	PRIMARY KEY (id),
 	CONSTRAINT level_name UNIQUE (name)
+);
+
+create table level_tag(
+	id integer,
+	level_id integer,
+	tag_id integer,
+	PRIMARY KEY (id),
+	CONSTRAINT level_tag UNIQUE (level_id, tag_id),
+	foreign key (level_id) references level(id),
+	foreign key (tag_id) references tag(id)
 );
 
 create table location(
@@ -51,11 +74,10 @@ create table location_tag(
 
 create table brand(
 	id integer,
-	brand_tag integer,
 	name varchar(200),
+	logo varchar(2000),
 	PRIMARY KEY (id),
-	CONSTRAINT brand_name UNIQUE(name), 
-	foreign key (brand_tag) references tag(id)
+	CONSTRAINT brand_name UNIQUE(name)
 );
 
 create table brand_tag(
@@ -68,13 +90,34 @@ create table brand_tag(
 	foreign key (tag_id) references tag(id)
 );
 
-create table country(
+
+create table racket(
 	id integer,
+	brand_id integer,
+	code varchar(200),
 	name varchar(200),
-	chi_name varchar(20),
-	PRIMARY KEY (id)
+	balance_point double,
+	frame varchar(200),
+	shaft varchar(200),
+	weight varchar(200),
+	grip varchar(200),
+	color varchar(200),
+	remarks varchar(5000),
+	PRIMARY KEY (ID),
+	foreign key (brand_id) references brand(id),
+	CONSTRAINT racket_brand_name UNIQUE(brand_id,name),
+	CONSTRAINT racket_brand_code UNIQUE(brand_id,code)
 );
 
+create table racket_tag(
+	id integer,
+	racket_id integer,
+	tag_id integer,
+	PRIMARY KEY (id),
+	CONSTRAINT racket_tag UNIQUE(racket_id, tag_id),
+	foreign key (racket_id) references racket(id),
+	foreign key (tag_id) references tag(id)
+);
 
 
 create table user(
@@ -91,7 +134,18 @@ create table user(
 	last_update_dtm timestamp not null default current_timestamp,
 	PRIMARY KEY (id),
 	foreign key (level_id) references level(id),
-	CONSTRAINT unique_name UNIQUE(user_name)
+	CONSTRAINT unique_name UNIQUE(user_name),
+	CONSTRAINT email UNIQUE(email)
+);
+
+create table user_tag(
+	id integer,
+	user_id integer,
+	tag_id integer,
+	PRIMARY KEY (id),
+	CONSTRAINT user_tag UNIQUE(user_id, tag_id),
+	foreign key (user_id) references user(id),
+	foreign key (tag_id) references tag(id)
 );
 
 create table user_role(
@@ -103,37 +157,6 @@ create table user_role(
 	foreign key (user_id) references user(id)
 );
 
-create table racket(
-	id integer,
-	brand_id integer,
-	code varchar(200),
-	name varchar(200),
-	balance_point double,
-	frame varchar(200),
-	shaft varchar(200),
-	weight_tag integer,
-	grip varchar(200),
-	color varchar(200),
-	country integer,
-	remarks varchar(5000),
-	PRIMARY KEY (ID),
-	foreign key (country) references country(id),
-	foreign key (brand_id) references brand(id),
-	foreign key (weight_tag) references tag(id),
-	CONSTRAINT racket_brand_name UNIQUE(brand_id,name),
-	CONSTRAINT racket_brand_code UNIQUE(brand_id,code)
-);
-
-create table racket_tag(
-	id integer,
-	racket_id integer,
-	tag_id integer,
-	PRIMARY KEY (id),
-	CONSTRAINT racket_tag UNIQUE(racket_id, tag_id),
-	foreign key (racket_id) references racket(id),
-	foreign key (tag_id) references tag(id)
-);
-
 
 create table event(
 	id integer,
@@ -142,6 +165,7 @@ create table event(
 	level_id integer,
 	public_event bit,
 	status integer,
+	game_type int, 
 	max_participant integer,
 	remark varchar(2000),
 	creator_id integer,
@@ -151,6 +175,27 @@ create table event(
 	foreign key (location_id) references location(id),
 	foreign key (level_id) references level(id),
 	foreign key (creator_id) references user(id)
+	
+);
+
+create table event_details(
+	id integer,
+	event_id integer,
+	court_no integer,
+	start_time timestamp,
+	end_time timestamp,
+	PRIMARY KEY (id),
+	foreign key (event_id) references event(id)
+);
+
+create table event_tag(
+	id integer,
+	event_id integer,
+	tag_id integer,
+	PRIMARY KEY (id),
+	CONSTRAINT event_tag UNIQUE(event_id, tag_id),
+	foreign key (event_id) references event(id),
+	foreign key (tag_id) references tag(id)
 );
 
 create table event_admin(
@@ -186,12 +231,3 @@ create table event_participant(
 	CONSTRAINT event_participant UNIQUE(event_id, user_id)
 );
 
-create table event_tag(
-	id integer,
-	event_id integer,
-	tag_id integer,
-	PRIMARY KEY (id),
-	CONSTRAINT event_tag UNIQUE(event_id, tag_id),
-	foreign key (event_id) references event(id),
-	foreign key (tag_id) references tag(id)
-);
