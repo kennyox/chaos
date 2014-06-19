@@ -1,69 +1,90 @@
 package com.chaos.jpa;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the event database table.
  * 
  */
 @Entity
-@NamedQuery(name="Event.findAll", query="SELECT e FROM Event e")
+@NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e")
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name="create_date")
-	private Timestamp createDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar date;
 
-	@Temporal(TemporalType.DATE)
-	private Date date;
-
-	@Column(name="max_participant")
-	private int maxParticipant;
-
-	@Column(name="public_event")
-	private byte publicEvent;
-
-	private String remark;
-
-	private int status;
-
-	//bi-directional many-to-one association to Level
+	// bi-directional many-to-one association to Location
 	@ManyToOne
-	private Level level;
-
-	//bi-directional many-to-one association to Location
-	@ManyToOne
+	@JoinColumn(name="location_id")
 	private Location location;
 
-	//bi-directional many-to-one association to User
+	// bi-directional many-to-one association to Level
 	@ManyToOne
-	@JoinColumn(name="creator_id")
+	@JoinColumn(name="level_id")
+	private Level level;
+
+	@Column(name = "public_event")
+	private byte publicEvent;
+
+	@Column(name = "status")
+	private int status;
+
+	@Column(name = "game_type")
+	private int gameType;
+
+	@Column(name = "max_participant")
+	private int maxParticipant;
+
+	@Column(name = "remark")
+	private String remark;
+
+	// bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name = "creator_id")
 	private User user;
 
-	//bi-directional many-to-one association to EventAdmin
-	@OneToMany(mappedBy="event")
+	@Column(name = "create_date")
+	private Timestamp createDate;
+
+	// bi-directional many-to-one association to EventAdmin
+	@OneToMany(mappedBy = "event")
 	private List<EventAdmin> eventAdmins;
 
-	//bi-directional many-to-one association to EventInvitee
-	@OneToMany(mappedBy="event")
+	// bi-directional many-to-one association to EventInvitee
+	@OneToMany(mappedBy = "event")
 	private List<EventInvitee> eventInvitees;
 
-	//bi-directional many-to-one association to EventParticipant
-	@OneToMany(mappedBy="event")
+	// bi-directional many-to-one association to EventParticipant
+	@OneToMany(mappedBy = "event")
 	private List<EventParticipant> eventParticipants;
 
-	//bi-directional many-to-one association to EventTag
-	@OneToMany(mappedBy="event")
+	// bi-directional many-to-one association to EventTag
+	@OneToMany(mappedBy = "event")
 	private List<EventTag> eventTags;
+
+	// bi-directional many-to-one association to EventTag
+	@OneToMany(mappedBy = "event")
+	private List<EventDetails> eventDetails;
 
 	public Event() {
 	}
@@ -84,11 +105,11 @@ public class Event implements Serializable {
 		this.createDate = createDate;
 	}
 
-	public Date getDate() {
+	public Calendar getDate() {
 		return this.date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 
@@ -200,14 +221,16 @@ public class Event implements Serializable {
 		this.eventParticipants = eventParticipants;
 	}
 
-	public EventParticipant addEventParticipant(EventParticipant eventParticipant) {
+	public EventParticipant addEventParticipant(
+			EventParticipant eventParticipant) {
 		getEventParticipants().add(eventParticipant);
 		eventParticipant.setEvent(this);
 
 		return eventParticipant;
 	}
 
-	public EventParticipant removeEventParticipant(EventParticipant eventParticipant) {
+	public EventParticipant removeEventParticipant(
+			EventParticipant eventParticipant) {
 		getEventParticipants().remove(eventParticipant);
 		eventParticipant.setEvent(null);
 
@@ -234,6 +257,27 @@ public class Event implements Serializable {
 		eventTag.setEvent(null);
 
 		return eventTag;
+	}
+
+	public List<EventDetails> getEventDetails() {
+		return eventDetails;
+	}
+
+	public void setEventDetails(List<EventDetails> eventDetails) {
+		this.eventDetails = eventDetails;
+	}
+
+	public EventDetails addEventDetails(EventDetails eventdetails) {
+		getEventDetails().add(eventdetails);
+		eventdetails.setEvent(this);
+
+		return eventdetails;
+	}
+
+	public EventDetails removeEventDetails(EventDetails eventdetails) {
+		getEventDetails().remove(eventdetails);
+		eventdetails.setEvent(null);
+		return eventdetails;
 	}
 
 }

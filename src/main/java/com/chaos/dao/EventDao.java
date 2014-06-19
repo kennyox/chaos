@@ -1,7 +1,5 @@
 package com.chaos.dao;
 
-import java.util.Date;
-
 import com.chaos.jpa.Event;
 import com.chaos.vo.EventSearchCriteriaVO;
 

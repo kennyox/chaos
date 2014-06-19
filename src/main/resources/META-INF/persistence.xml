@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="chaos">
-		<class>com.chaos.jpa.Brand</class>
-		<class>com.chaos.jpa.BrandTag</class>
+		<class>com.chaos.jpa.Tag</class>
+		<class>com.chaos.jpa.TagGroup</class>
+		<class>com.chaos.jpa.TagGroupList</class>
 		<class>com.chaos.jpa.Country</class>
-		<class>com.chaos.jpa.Event</class>
-		<class>com.chaos.jpa.EventAdmin</class>
-		<class>com.chaos.jpa.EventInvitee</class>
-		<class>com.chaos.jpa.EventParticipant</class>
 		<class>com.chaos.jpa.Level</class>
+		<class>com.chaos.jpa.LevelTag</class>
 		<class>com.chaos.jpa.Location</class>
 		<class>com.chaos.jpa.LocationTag</class>
+		<class>com.chaos.jpa.Brand</class>
+		<class>com.chaos.jpa.BrandTag</class>
 		<class>com.chaos.jpa.Racket</class>
 		<class>com.chaos.jpa.RacketTag</class>
-		<class>com.chaos.jpa.Tag</class>
 		<class>com.chaos.jpa.User</class>
+		<class>com.chaos.jpa.UserTag</class>
 		<class>com.chaos.jpa.UserRole</class>
+		<class>com.chaos.jpa.Event</class>
+		<class>com.chaos.jpa.EventDetails</class>
 		<class>com.chaos.jpa.EventTag</class>
+		<class>com.chaos.jpa.EventAdmin</class>
+		<class>com.chaos.jpa.EventInvitee</class>
+		<class>com.chaos.jpa.EventParticipant</class>		
 	</persistence-unit>
 </persistence>

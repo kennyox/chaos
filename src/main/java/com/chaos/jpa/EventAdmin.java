@@ -24,10 +24,12 @@ public class EventAdmin implements Serializable {
 
 	//bi-directional many-to-one association to Event
 	@ManyToOne
+	@JoinColumn(name="event_id")
 	private Event event;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public EventAdmin() {

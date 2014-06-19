@@ -1,37 +1,42 @@
 package com.chaos.jpa;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.*;
+
+import java.util.List;
 
 /**
  * The persistent class for the level database table.
  * 
  */
 @Entity
-@NamedQuery(name="Level.findAll", query="SELECT l FROM Level l")
+@NamedQuery(name = "Level.findAll", query = "SELECT l FROM Level l")
 public class Level implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name="chi_description")
+	@Column(name = "chi_description")
 	private String chiDescription;
 
 	private String description;
 
 	private String name;
 
-	//bi-directional many-to-one association to Event
-	@OneToMany(mappedBy="level")
+	// bi-directional many-to-one association to Event
+	@OneToMany(mappedBy = "level")
 	private List<Event> events;
 
-	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="level")
+	// bi-directional many-to-one association to User
+	@OneToMany(mappedBy = "level")
 	private List<User> users;
+
+	// bi-directional many-to-one association to LocationTag
+	@OneToMany(mappedBy = "level")
+	private List<LevelTag> levelTags;
 
 	public Level() {
 	}
@@ -110,6 +115,26 @@ public class Level implements Serializable {
 		user.setLevel(null);
 
 		return user;
+	}
+
+	public List<LevelTag> getLevelTags() {
+		return levelTags;
+	}
+
+	public void setLevelTags(List<LevelTag> levelTags) {
+		this.levelTags = levelTags;
+	}
+
+	public LevelTag addLocationTag(LevelTag levelTag) {
+		getLevelTags().add(levelTag);
+		levelTag.setLevel(this);
+		return levelTag;
+	}
+
+	public LevelTag removeLocationTag(LevelTag levelTag) {
+		getLevelTags().remove(levelTag);
+		levelTag.setLevel(null);
+		return levelTag;
 	}
 
 }

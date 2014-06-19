@@ -1,71 +1,77 @@
 package com.chaos.jpa;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
-
 
 /**
  * The persistent class for the user database table.
  * 
  */
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name="create_dtm")
+	@Column(name = "create_dtm")
 	private Timestamp createDtm;
 
 	private String email;
 
-	@Column(name="first_name")
+	@Column(name = "first_name")
 	private String firstName;
 
 	private String icon;
 
-	@Column(name="last_name")
+	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name="last_update_dtm")
+	@Column(name = "last_update_dtm")
 	private Timestamp lastUpdateDtm;
 
-	@Column(name="nick_name")
+	@Column(name = "nick_name")
 	private String nickName;
 
 	private String password;
 
-	@Column(name="user_name")
+	@Column(name = "user_name")
 	private String userName;
 
-	//bi-directional many-to-one association to Event
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to Event
+	@OneToMany(mappedBy = "user")
 	private List<Event> events;
 
-	//bi-directional many-to-one association to EventAdmin
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to EventAdmin
+	@OneToMany(mappedBy = "user")
 	private List<EventAdmin> eventAdmins;
 
-	//bi-directional many-to-one association to EventInvitee
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to EventInvitee
+	@OneToMany(mappedBy = "user")
 	private List<EventInvitee> eventInvitees;
 
-	//bi-directional many-to-one association to EventParticipant
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to EventParticipant
+	@OneToMany(mappedBy = "user")
 	private List<EventParticipant> eventParticipants;
 
-	//bi-directional many-to-one association to Level
+	// bi-directional many-to-one association to Level
 	@ManyToOne
+	@JoinColumn(name="level_id")
 	private Level level;
 
-	//bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to UserRole
+	@OneToMany(mappedBy = "user")
 	private List<UserRole> userRoles;
+
+	// bi-directional many-to-one association to RacketTag
+	@OneToMany(mappedBy = "user")
+	private List<UserTag> userTags;
 
 	public User() {
 	}
@@ -224,14 +230,16 @@ public class User implements Serializable {
 		this.eventParticipants = eventParticipants;
 	}
 
-	public EventParticipant addEventParticipant(EventParticipant eventParticipant) {
+	public EventParticipant addEventParticipant(
+			EventParticipant eventParticipant) {
 		getEventParticipants().add(eventParticipant);
 		eventParticipant.setUser(this);
 
 		return eventParticipant;
 	}
 
-	public EventParticipant removeEventParticipant(EventParticipant eventParticipant) {
+	public EventParticipant removeEventParticipant(
+			EventParticipant eventParticipant) {
 		getEventParticipants().remove(eventParticipant);
 		eventParticipant.setUser(null);
 
@@ -266,6 +274,28 @@ public class User implements Serializable {
 		userRole.setUser(null);
 
 		return userRole;
+	}
+
+	public List<UserTag> getUserTags() {
+		return userTags;
+	}
+
+	public void setUserTags(List<UserTag> userTags) {
+		this.userTags = userTags;
+	}
+
+	public UserTag addUserRole(UserTag userTags) {
+		getUserTags().add(userTags);
+		userTags.setUser(this);
+
+		return userTags;
+	}
+
+	public UserTag removeUserRole(UserTag userTags) {
+		getUserTags().remove(userTags);
+		userTags.setUser(null);
+
+		return userTags;
 	}
 
 }

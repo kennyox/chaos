@@ -4,33 +4,31 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the brand database table.
  * 
  */
 @Entity
-@NamedQuery(name="Brand.findAll", query="SELECT b FROM Brand b")
+@NamedQuery(name = "Brand.findAll", query = "SELECT b FROM Brand b")
 public class Brand implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@Column(name = "name")
 	private String name;
 
-	//bi-directional many-to-one association to Tag
-	@ManyToOne
-	@JoinColumn(name="brand_tag")
-	private Tag tag;
+	@Column(name = "logo")
+	private String logo;
 
-	//bi-directional many-to-one association to BrandTag
-	@OneToMany(mappedBy="brand")
+	// bi-directional many-to-one association to BrandTag
+	@OneToMany(mappedBy = "brand")
 	private List<BrandTag> brandTags;
 
-	//bi-directional many-to-one association to Racket
-	@OneToMany(mappedBy="brand")
+	// bi-directional many-to-one association to Racket
+	@OneToMany(mappedBy = "brand")
 	private List<Racket> rackets;
 
 	public Brand() {
@@ -52,12 +50,12 @@ public class Brand implements Serializable {
 		this.name = name;
 	}
 
-	public Tag getTag() {
-		return this.tag;
+	public String getLogo() {
+		return logo;
 	}
 
-	public void setTag(Tag tag) {
-		this.tag = tag;
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 
 	public List<BrandTag> getBrandTags() {

@@ -4,53 +4,53 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the racket database table.
  * 
  */
 @Entity
-@NamedQuery(name="Racket.findAll", query="SELECT r FROM Racket r")
+@NamedQuery(name = "Racket.findAll", query = "SELECT r FROM Racket r")
 public class Racket implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name="balance_point")
+	@Column(name = "balance_point")
 	private double balancePoint;
 
+	@Column(name = "code")
 	private String code;
 
+	@Column(name = "color")
 	private String color;
 
+	@Column(name = "frame")
 	private String frame;
 
+	@Column(name = "grip")
 	private String grip;
 
+	@Column(name = "name")
 	private String name;
 
+	@Column(name = "remarks")
 	private String remarks;
 
+	@Column(name = "shaft")
 	private String shaft;
 
-	//bi-directional many-to-one association to Brand
+	@Column(name = "weight")
+	private String weight;
+
+	// bi-directional many-to-one association to Brand
 	@ManyToOne
+	@JoinColumn(name="brand_id")
 	private Brand brand;
 
-	//bi-directional many-to-one association to Country
-	@ManyToOne
-	@JoinColumn(name="country")
-	private Country countryBean;
-
-	//bi-directional many-to-one association to Tag
-	@ManyToOne
-	@JoinColumn(name="weight_tag")
-	private Tag tag;
-
-	//bi-directional many-to-one association to RacketTag
-	@OneToMany(mappedBy="racket")
+	// bi-directional many-to-one association to RacketTag
+	@OneToMany(mappedBy = "racket")
 	private List<RacketTag> racketTags;
 
 	public Racket() {
@@ -134,22 +134,6 @@ public class Racket implements Serializable {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
-	}
-
-	public Country getCountryBean() {
-		return this.countryBean;
-	}
-
-	public void setCountryBean(Country countryBean) {
-		this.countryBean = countryBean;
-	}
-
-	public Tag getTag() {
-		return this.tag;
-	}
-
-	public void setTag(Tag tag) {
-		this.tag = tag;
 	}
 
 	public List<RacketTag> getRacketTags() {

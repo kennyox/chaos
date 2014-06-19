@@ -1,49 +1,46 @@
 package com.chaos.jpa;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.*;
+
+import java.util.List;
 
 /**
  * The persistent class for the tag database table.
  * 
  */
 @Entity
-@NamedQuery(name="Tag.findAll", query="SELECT t FROM Tag t")
+@NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t")
 public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String description;
 
 	private String name;
 
-	//bi-directional many-to-one association to Brand
-	@OneToMany(mappedBy="tag")
-	private List<Brand> brands;
+	// bi-directional many-to-one association to Tag
+	@OneToMany(mappedBy = "tag")
+	private List<TagGroupList> tagGroupList;
 
-	//bi-directional many-to-one association to BrandTag
-	@OneToMany(mappedBy="tag")
+	// bi-directional many-to-one association to BrandTag
+	@OneToMany(mappedBy = "tag")
 	private List<BrandTag> brandTags;
 
-	//bi-directional many-to-one association to LocationTag
-	@OneToMany(mappedBy="tag")
+	// bi-directional many-to-one association to LocationTag
+	@OneToMany(mappedBy = "tag")
 	private List<LocationTag> locationTags;
 
-	//bi-directional many-to-one association to Racket
-	@OneToMany(mappedBy="tag")
-	private List<Racket> rackets;
-
-	//bi-directional many-to-one association to RacketTag
-	@OneToMany(mappedBy="tag")
+	// bi-directional many-to-one association to RacketTag
+	@OneToMany(mappedBy = "tag")
 	private List<RacketTag> racketTags;
 
-	//bi-directional many-to-one association to EventTag
-	@OneToMany(mappedBy="tag")
+	// bi-directional many-to-one association to EventTag
+	@OneToMany(mappedBy = "tag")
 	private List<EventTag> eventTags;
 
 	public Tag() {
@@ -55,6 +52,27 @@ public class Tag implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<TagGroupList> getTagGroupList() {
+		return tagGroupList;
+	}
+
+	public void setTagGroupList(List<TagGroupList> tagGroupList) {
+		this.tagGroupList = tagGroupList;
+	}
+
+	public TagGroupList addTagGroupList(TagGroupList tagGroupList) {
+		getTagGroupList().add(tagGroupList);
+		tagGroupList.setTag(this);
+
+		return tagGroupList;
+	}
+
+	public TagGroupList removeTagGroupList(TagGroupList tagGroupList) {
+		getTagGroupList().remove(tagGroupList);
+		tagGroupList.setTag(null);
+		return tagGroupList;
 	}
 
 	public String getDescription() {
@@ -71,28 +89,6 @@ public class Tag implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Brand> getBrands() {
-		return this.brands;
-	}
-
-	public void setBrands(List<Brand> brands) {
-		this.brands = brands;
-	}
-
-	public Brand addBrand(Brand brand) {
-		getBrands().add(brand);
-		brand.setTag(this);
-
-		return brand;
-	}
-
-	public Brand removeBrand(Brand brand) {
-		getBrands().remove(brand);
-		brand.setTag(null);
-
-		return brand;
 	}
 
 	public List<BrandTag> getBrandTags() {
@@ -137,28 +133,6 @@ public class Tag implements Serializable {
 		locationTag.setTag(null);
 
 		return locationTag;
-	}
-
-	public List<Racket> getRackets() {
-		return this.rackets;
-	}
-
-	public void setRackets(List<Racket> rackets) {
-		this.rackets = rackets;
-	}
-
-	public Racket addRacket(Racket racket) {
-		getRackets().add(racket);
-		racket.setTag(this);
-
-		return racket;
-	}
-
-	public Racket removeRacket(Racket racket) {
-		getRackets().remove(racket);
-		racket.setTag(null);
-
-		return racket;
 	}
 
 	public List<RacketTag> getRacketTags() {
